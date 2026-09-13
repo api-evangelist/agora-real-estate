@@ -1,0 +1,108 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live probes of auth.agorareal.com discovery documents and websiteapi.agorareal.com/wp-json, plus
+  the Agora trust center (Scytale) framework list and the agorareal.com security page, 2026-09-12.
+summary: >-
+  Agora's cross-cutting conformance is concentrated in identity: it publishes both OpenID Connect
+  discovery and RFC 8414 authorization-server metadata on its own domain, supports PKCE S256 and the
+  RFC 8628 device-code grant. Its published API uses the WordPress error envelope rather than RFC
+  9457 problem+json, and RFC 8288 Link-header pagination. Compliance certification is real and
+  externally attested — SOC 2 Type II, SOC 1, ISO/IEC 27001:2022 and GDPR are all listed as
+  fully implemented on Agora's own trust center.
+standards:
+- id: oauth2
+  conforms: true
+  evidence: >-
+    https://auth.agorareal.com/.well-known/oauth-authorization-server (HTTP 200) declares
+    authorization_endpoint, token_endpoint, introspection_endpoint, jwks_uri and the
+    authorization_code, refresh_token and device_code grants.
+- id: oidc
+  conforms: true
+  evidence: >-
+    https://auth.agorareal.com/.well-known/openid-configuration (HTTP 200) — issuer
+    https://auth.agorareal.com, RS256 id_token signing, userinfo_endpoint, subject_types public.
+- id: rfc8414-oauth-authorization-server
+  conforms: true
+  evidence: https://auth.agorareal.com/.well-known/oauth-authorization-server — HTTP 200, valid metadata document.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported ["S256"] in the RFC 8414 metadata.
+- id: rfc8628-device-authorization-grant
+  conforms: true
+  evidence: >-
+    device_authorization_endpoint https://auth.agorareal.com/oauth2/device_authorization and
+    grant_types_supported includes urn:ietf:params:oauth:grant-type:device_code.
+- id: rfc9728-oauth-protected-resource
+  conforms: false
+  evidence: /.well-known/oauth-protected-resource returns 404 on auth.agorareal.com and is absent on every other host.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    The public content API returns the WordPress envelope {"code":...,"message":...,"data":{"status":...}}
+    as application/json, not application/problem+json. Observed on
+    https://websiteapi.agorareal.com/wp-json/agora/v1/nope-does-not-exist (404).
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: /.well-known/security.txt returns 404 on every Agora host — see well-known/agora-real-estate-well-known.yml.
+- id: rfc8615-well-known-uris
+  conforms: true
+  evidence: Two documents served under /.well-known/ on auth.agorareal.com, proven against a 404 control probe.
+- id: rfc8288-web-linking
+  conforms: true
+  evidence: >-
+    Collection responses carry Link: <...&page=2>; rel="next" alongside X-WP-Total and
+    X-WP-TotalPages. Observed on https://websiteapi.agorareal.com/wp-json/wp/v2/posts?per_page=1.
+- id: pagination
+  conforms: true
+  evidence: page / per_page / offset / order / orderby query parameters declared on every wp/v2 collection route in the live route index.
+- id: idempotency
+  conforms: false
+  evidence: No Idempotency-Key header or replay-protection mechanism is declared anywhere in the route index or the docs.
+- id: oembed
+  conforms: true
+  evidence: >-
+    The oembed/1.0 namespace is registered and served — /wp-json/oembed/1.0/embed accepts url, format
+    and maxwidth, per the live route index.
+compliance:
+- id: soc2-type2
+  conforms: true
+  status: fully-implemented
+  evidence: >-
+    Agora trust center framework list, https://trust.agorareal.com/ (data served by Scytale at
+    https://api.scytale.ai/views/trust-center/public/page-data, HTTP 200, 2026-09-12).
+- id: soc1
+  conforms: true
+  status: fully-implemented
+  evidence: Agora trust center framework list, https://trust.agorareal.com/ (2026-09-12).
+- id: iso-27001-2022
+  conforms: true
+  status: fully-implemented
+  evidence: >-
+    Agora trust center framework list plus https://agorareal.com/security-and-privacy/ — "Agora is in
+    full compliance with the ISO/IEC 27001 and SOC 1/2 standards".
+- id: gdpr
+  conforms: true
+  status: fully-implemented
+  evidence: Agora trust center framework list, https://trust.agorareal.com/ (2026-09-12).
+domain_standards:
+  note: >-
+    Real estate investment management and private-fund administration have candidate domain standards
+    — MISMO for mortgage and property data, the ILPA reporting templates for LP reporting and capital
+    calls, FIX/SWIFT ISO 20022 for payment instructions, IRS Schedule K-1 e-file schemas. REWARD-ONLY:
+    an absence is not a penalty. Agora's only public contract is a content API, so no domain standard
+    can be asserted from a spec, and none is claimed in its public material.
+  candidates:
+  - id: mismo
+    conforms: false
+    evidence: No MISMO schema, namespace or claim appears in the public route index or on agorareal.com.
+  - id: ilpa-reporting-template
+    conforms: false
+    evidence: >-
+      Agora markets institutional report types and waterfall automation but names no ILPA template
+      conformance on the pricing, reporting or investor-reporting pages.
+  - id: iso-20022
+    conforms: false
+    evidence: >-
+      ACH and cross-border payments are marketed (banking services provided by Thread Bank, Member
+      FDIC) but no message-format conformance is published.

@@ -1,0 +1,152 @@
+generated: '2026-09-12'
+method: derived
+source: openapi/agora-real-estate-website-content-api-openapi.yml (derived from https://websiteapi.agorareal.com/wp-json)
+summary: >-
+  The entity graph of Agora's public website content API. Relationships are derived from the
+  reference arguments the live route index declares on each collection — a post takes categories,
+  tags and author; a case study takes case-study-tag and case_study_taxonomy; an AI release takes
+  release_product, release_update_type, release_audience and release_plan. Two of these content types
+  are Agora's own additions rather than WordPress defaults, and the release taxonomy is the machine
+  representation of the public "Season of Innovation" calendar.
+note: >-
+  The route index declares request arguments but not response schemas, so field-level attributes are
+  only asserted where they were observed on a live response.
+entities:
+- name: post
+  path: /wp/v2/posts
+  first_party: false
+  description: Blog, learning-center, GP hub, product-update, webinar and press articles.
+  observed_count: 365
+  count_source: 'x-wp-total header on /wp/v2/posts?per_page=1'
+  relationships:
+  - type: belongs_to
+    target: user
+    via: author
+  - type: has_many
+    target: category
+    via: categories
+  - type: has_many
+    target: tag
+    via: tags
+  - type: has_one
+    target: media
+    via: featured_media
+- name: page
+  path: /wp/v2/pages
+  first_party: false
+  description: Marketing, solution and policy pages (76 in the published page sitemap).
+  relationships:
+  - type: belongs_to
+    target: page
+    via: parent
+  - type: has_one
+    target: media
+    via: featured_media
+- name: case-study
+  path: /wp/v2/case-study
+  first_party: true
+  description: Customer case studies (Verivest, Olive Tree, Metonic, Secured Debt, Katz Capital).
+  relationships:
+  - type: has_many
+    target: case-study-tag
+    via: case-study-tag
+  - type: has_many
+    target: case_study_taxonomy
+    via: case_study_taxonomy
+  - type: has_one
+    target: media
+    via: featured_media
+- name: agora-author
+  path: /wp/v2/agora-authors
+  first_party: true
+  description: Named contributor profiles used as bylines across posts and case studies.
+  relationships:
+  - type: has_one
+    target: media
+    via: featured_media
+- name: ai-new-release
+  path: /wp/v2/ai-new-release
+  first_party: true
+  description: >-
+    A dated "Season of Innovation" release entry. Also served, pre-joined, by the first-party route
+    /agora/v1/get_ai_new_releases_posts.
+  observed_count: 10
+  relationships:
+  - type: has_many
+    target: release_product
+    via: release_product
+  - type: has_many
+    target: release_update_type
+    via: release_update_type
+  - type: has_many
+    target: release_audience
+    via: release_audience
+  - type: has_many
+    target: release_plan
+    via: release_plan
+- name: release_product
+  path: /wp/v2/release_product
+  first_party: true
+  description: >-
+    Product-area taxonomy for releases — Fundraising, Investor Portal, CRM, Reporting, Waterfall,
+    Investment Management, Accounting, Assets, AI, Cortex, Signal.
+- name: release_update_type
+  path: /wp/v2/release_update_type
+  first_party: true
+  description: Change-type taxonomy — New product, New feature, Feature upgrade.
+- name: release_audience
+  path: /wp/v2/release_audience
+  first_party: true
+  description: Audience taxonomy for releases.
+- name: release_plan
+  path: /wp/v2/release_plan
+  first_party: true
+  description: Plan taxonomy for releases — ties a release to a subscription tier.
+- name: category
+  path: /wp/v2/categories
+  first_party: false
+  description: >-
+    Content categories. Observed slugs include reports-and-research, webinars, gp-hub, blog,
+    product-updates, agora-news, deal-makers, compare, learn.
+- name: tag
+  path: /wp/v2/tags
+  first_party: false
+- name: case-study-tag
+  path: /wp/v2/case-study-tag
+  first_party: true
+- name: case_study_taxonomy
+  path: /wp/v2/case_study_taxonomy
+  first_party: true
+- name: media
+  path: /wp/v2/media
+  first_party: false
+  description: >-
+    Images and files. This install is Cloudinary-backed — the media write schema carries an
+    is_cloudinary_synced flag and a cloudinary/v1 namespace is registered — and delivered URLs
+    resolve to res.cloudinary.com.
+  relationships:
+  - type: belongs_to
+    target: post
+    via: post
+  - type: belongs_to
+    target: user
+    via: author
+- name: comment
+  path: /wp/v2/comments
+  first_party: false
+- name: user
+  path: /wp/v2/users
+  first_party: false
+  description: WordPress editorial users. The collection is readable; /wp/v2/users/me is 401 anonymously.
+first_party_routes:
+  namespace: agora/v1
+  count: 25
+  note: >-
+    Agora's own namespace serves pre-joined, site-shaped projections over the entities above rather
+    than new entities — get-posts-by-post-slug, get-case-study-by-post-slug,
+    get-author-by-author-slug, get-author-detail-by-author-id, get_authors_batch,
+    get_casestudy_batch, get_category_batch_posts, posts-by-category-slug-or-id,
+    recent-post-acc-to-cat, get-more-articles-by-blog-slug, all_categories, get-categories,
+    get_ai_new_releases_posts, get_ai_new_releases_filters, flexible-content,
+    fetch-theme-setting, Carrers (open positions), sitemap, yoast_redirects, get-privacy-policy,
+    get-cookie-policy.

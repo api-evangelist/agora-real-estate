@@ -1,23 +1,275 @@
 aid: agora-real-estate
 name: Agora Real Estate
-description: 'Agora Real Estate is a company surfaced via the API Evangelist harvest backlog (source:
-  secondary-market) and added to the network as a stub for full-pipeline profiling.'
+description: >-
+  Agora (agorareal.com) is a real estate investment management platform for general partners,
+  syndicators, owners/operators and investment firms, covering fundraising and investor onboarding,
+  an investor portal and investor CRM, digital subscriptions and e-signature, data rooms, cap table
+  and transaction management, distribution waterfall automation, capital calls, ACH and cross-border
+  payments, K-1 and document management, investor reporting, and integrated fund accounting,
+  bookkeeping and tax services. It is sold as a subscription starting at $749/month for the Essential
+  tier, with Pro and Enterprise tiers quoted, and its customer-facing platform is multi-tenant —
+  every client firm gets its own investor portal and client-platform host under agorareal.com. Agora
+  publishes no developer portal and no public reference for that platform API: "API Access" is an
+  Enterprise line item priced separately, and the tenant API answers nothing anonymously. What it
+  does publish anonymously is the first-party content API behind its own website, a headless
+  WordPress install whose route index and custom agora/v1 namespace are served in the open, plus a
+  full OAuth 2.0 / OpenID Connect authorization server on its own domain for the new Cortex AI
+  product. Its own release feed schedules an "API + MCP" launch for 22 September 2026.
+image: https://res.cloudinary.com/de1ep59a0/images/v1731398288/logo-primary-blue/logo-primary-blue.png
 url: https://raw.githubusercontent.com/api-evangelist/agora-real-estate/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:secondary-market
-x-tier: stub
-x-tier-reason: harvest
 specificationVersion: '0.20'
 created: '2026-09-12'
 modified: '2026-09-12'
+position: Producing
 tags:
-- Company
-apis: []
+- Real Estate
+- Investment Management
+- Private Equity
+- Fund Administration
+- Investor Relations
+- Capital Raising
+- Syndication
+- Fund Accounting
+- Investor Portal
+- CRM
+- Payments
+- Content Management
+- Software-as-a-Service
+apis:
+- aid: agora-real-estate:agora-website-content-api
+  name: Agora Website Content API
+  description: >-
+    The anonymous, read-mostly content API behind agorareal.com. The marketing site is a headless
+    WordPress install at websiteapi.agorareal.com fronted by a Next.js application, and its WordPress
+    REST API is served publicly — the self-describing route index at /wp-json returned HTTP 200 and
+    326,828 bytes on 2026-09-12, declaring 295 routes across ten namespaces. Alongside the stock
+    wp/v2 namespace, Agora ships its own first-party agora/v1 namespace of 25 routes purpose-built
+    for the site: posts and case studies by slug, author detail and author batches, category batches,
+    the cookie and privacy policies, the site map, Yoast redirects, theme settings, careers
+    positions, and the "Season of Innovation" AI release feed. Every route sampled answered
+    anonymously with real data. No OpenAPI is published by Agora; the specification in this repo was
+    derived from that live route index.
+  humanURL: https://agorareal.com/
+  baseURL: https://websiteapi.agorareal.com/wp-json
+  tags:
+  - Content Management
+  - Real Estate
+  properties:
+  - type: OpenAPI
+    url: openapi/agora-real-estate-website-content-api-openapi.yml
+  - type: Overlay
+    url: overlays/agora-real-estate-website-content-api-overlay.yaml
+  - type: Examples
+    url: examples/agora-real-estate-get-categories.json
+  - type: Examples
+    url: examples/agora-real-estate-ai-new-releases-posts.json
+  - type: ErrorCatalog
+    url: errors/agora-real-estate-problem-types.yml
+  - type: DataModel
+    url: data-model/agora-real-estate-data-model.yml
+  - type: Conventions
+    url: conventions/agora-real-estate-conventions.yml
+  x-access: public
+  x-evidence:
+    discovered: '2026-09-12'
+    method: probed
+    source: https://websiteapi.agorareal.com/wp-json
+    probes:
+    - url: https://websiteapi.agorareal.com/wp-json
+      status: 200
+    - url: https://websiteapi.agorareal.com/wp-json/agora/v1
+      status: 200
+    - url: https://websiteapi.agorareal.com/wp-json/agora/v1/get-categories
+      status: 200
+    - url: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+      status: 200
+    - url: https://websiteapi.agorareal.com/wp-json/wp/v2/posts?per_page=1
+      status: 200
+    - url: https://websiteapi.agorareal.com/wp-json/wp/v2/users/me
+      status: 401
+    ownership_note: >-
+      The host is a subdomain of agorareal.com, the route index reports name "Agora" and url
+      https://websiteapi.agorareal.com, the content served is Agora's own marketing site, and
+      agorareal.com's own schema.org Organization block names https://websiteapi.agorareal.com as the
+      organization URL. First-party, not a sibling brand.
+- aid: agora-real-estate:agora-client-platform-api
+  name: Agora Client Platform API
+  description: >-
+    The tenant-scoped HTTPS API behind Agora's client platform and investor portal. Its existence and
+    shape are established from Agora's own production surface: certificate transparency shows
+    per-tenant hosts under agorareal.com (390 <tenant>.acp.agorareal.com client-platform hosts, 389
+    <tenant>.portal.agorareal.com investor-portal hosts and 192 api.<tenant>.agorareal.com hosts),
+    and the client-platform single-page app served from cdn-prod.acp.agorareal.com calls same-origin
+    /api/* routes — /api/crm/..., /api/investor/..., /api/admin/cognito/..., /api/account-subscription
+    — indicating AWS Cognito as the platform identity provider. The surface is unreachable
+    anonymously: every anonymous request to /api and /api/* on the demo tenant and on sampled live
+    tenants returned nginx HTTP 502, and app.agorareal.com (an AWS API Gateway custom domain) returns
+    {"message":"Not Found"} for every path including a nonsense control probe. Agora publishes no
+    reference, no OpenAPI and no authentication documentation for it; "API Access" appears on the
+    pricing page as an Enterprise line item marked "Priced Separately". Recorded as a measured, gated
+    surface — no operations, parameters or auth scheme are asserted.
+  humanURL: https://agorareal.com/pricing/
+  baseURL: https://{tenant}.acp.agorareal.com/api
+  tags:
+  - Investment Management
+  - Investor Portal
+  - CRM
+  properties:
+  - type: Pricing
+    url: https://agorareal.com/pricing/
+  - type: Login
+    url: https://demo.portal.agorareal.com/
+  x-access: gated
+  x-evidence:
+    discovered: '2026-09-12'
+    method: probed
+    source: https://cdn-prod.acp.agorareal.com/assets/src-DJsn4Q_l.js
+    probes:
+    - url: https://demo.acp.agorareal.com/api
+      status: 502
+    - url: https://alto.acp.agorareal.com/api
+      status: 502
+    - url: https://app.agorareal.com/
+      status: 404
+    - url: https://app.agorareal.com/openapi.json
+      status: 404
+    - url: https://app.agorareal.com/.well-known/zzz-api-evangelist-control-7c41
+      status: 404
+    base_url_note: >-
+      Templated by design — the platform is multi-tenant and each client firm is served on its own
+      <tenant>.acp.agorareal.com host. No single non-templated production host is published.
+- aid: agora-real-estate:agora-authorization-server
+  name: Agora Authorization Server
+  description: >-
+    Agora's OAuth 2.0 / OpenID Connect authorization server, served on its own domain at
+    auth.agorareal.com and reached by redirect from the Cortex sign-in host
+    (cortex.agorareal.com → auth.agorareal.com/?client_id=...). It publishes both RFC 8414
+    authorization-server metadata and OpenID Connect discovery anonymously: issuer
+    https://auth.agorareal.com, authorization-code, refresh-token, device-code
+    (urn:ietf:params:oauth:grant-type:device_code) and client-credentials grants, PKCE S256, RS256
+    ID tokens, and the scopes openid, profile, email and offline_access. The deployment is a
+    WorkOS AuthKit hosted instance on Agora's own domain; no client registration is offered publicly,
+    and the protected resources it fronts are not documented.
+  humanURL: https://agorareal.com/cortex/
+  baseURL: https://auth.agorareal.com
+  tags:
+  - Identity
+  - OAuth
+  - OpenID Connect
+  properties:
+  - type: OpenIDConnect
+    url: well-known/agora-real-estate-auth-openid-configuration.json
+  x-access: public-metadata
+  x-evidence:
+    discovered: '2026-09-12'
+    method: probed
+    source: https://auth.agorareal.com/.well-known/openid-configuration
+    probes:
+    - url: https://auth.agorareal.com/.well-known/openid-configuration
+      status: 200
+    - url: https://auth.agorareal.com/.well-known/oauth-authorization-server
+      status: 200
+    - url: https://auth.agorareal.com/.well-known/oauth-protected-resource
+      status: 404
+    - url: https://auth.agorareal.com/.well-known/zzz-api-evangelist-control-7c41
+      status: 404
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/agora-real-estate-domain-security.yml
 - type: Website
-  url: https://www.nasdaqprivatemarket.com/
+  url: https://agorareal.com/
+- type: Blog
+  url: https://agorareal.com/blog/
+- type: Pricing
+  url: https://agorareal.com/pricing/
+- type: TermsOfService
+  url: https://agorareal.com/terms-conditions/
+- type: PrivacyPolicy
+  url: https://agorareal.com/privacy-policy/
+- type: Support
+  url: https://agorareal.com/contact-us/
+- type: Login
+  url: https://demo.portal.agorareal.com/
+- type: Roadmap
+  url: https://agorareal.com/season-of-innovation/
+- type: TrustCenter
+  url: https://trust.agorareal.com/
+- type: Compliance
+  url: security/agora-real-estate-trust-center.yml
+- type: LLMsTxt
+  url: llms/agora-real-estate-llms.txt
+- type: WellKnown
+  url: well-known/agora-real-estate-well-known.yml
+- type: Conformance
+  url: conformance/agora-real-estate-conformance.yml
+- type: Plans
+  url: plans/agora-real-estate-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/agora-real-estate-rate-limits.yml
+- type: Packages
+  url: packages/agora-real-estate-packages.yml
+- type: ChangeLog
+  url: changelog/agora-real-estate-changelog.yml
+- type: Lifecycle
+  url: lifecycle/agora-real-estate-lifecycle.yml
+- type: Authentication
+  url: authentication/agora-real-estate-authentication.yml
+- type: OAuthScopes
+  url: scopes/agora-real-estate-scopes.yml
+- type: AgentSkill
+  url: skills/_index.yml
+x-enrichment:
+  date: '2026-09-12'
+  status: enriched
+  artifacts_added: 26
+  pass: local-v3
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Agora publishes one genuinely callable API anonymously — the first-party website content API at
+    https://websiteapi.agorareal.com/wp-json, whose self-describing route index (HTTP 200, 326,828
+    bytes, 295 routes across ten namespaces, including Agora's own 25-route agora/v1 namespace) is
+    the source the OpenAPI in this repo was derived from — plus a full OAuth 2.0 / OpenID Connect
+    authorization server on its own domain at auth.agorareal.com, which serves both OIDC discovery
+    and RFC 8414 metadata against a 404 control probe. What is NOT public is the product API: the
+    investment-management platform is multi-tenant at https://{tenant}.acp.agorareal.com/api, every
+    anonymous /api/* request returns nginx 502, app.agorareal.com answers {"message":"Not Found"} for
+    every path including a control probe, and "API Access" appears on the pricing page only as an
+    Enterprise line item marked "Priced Separately" with no reference, no specification and no
+    developer portal anywhere on the 76-page site. Agora's own release feed dates that gap closing —
+    a release titled "API + MCP" is scheduled for 2026-09-22 — so this profile is worth re-running
+    after that date.
+  evidence:
+  - url: https://websiteapi.agorareal.com/wp-json
+    status: 200
+  - url: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+    status: 200
+  - url: https://auth.agorareal.com/.well-known/openid-configuration
+    status: 200
+  - url: https://auth.agorareal.com/.well-known/oauth-authorization-server
+    status: 200
+  - url: https://auth.agorareal.com/.well-known/zzz-api-evangelist-control-7c41
+    status: 404
+  - url: https://agorareal.com/llms.txt
+    status: 200
+  - url: https://trust.agorareal.com/
+    status: 200
+  - url: https://agorareal.com/pricing/
+    status: 200
+  - url: https://demo.acp.agorareal.com/api
+    status: 502
+  - url: https://app.agorareal.com/openapi.json
+    status: 404
+  - url: https://agorareal.com/.well-known/security.txt
+    status: 404
+  - url: https://agorareal.com/.well-known/agent-card.json
+    status: 404
+  checked: '2026-09-12'

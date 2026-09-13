@@ -1,0 +1,36 @@
+generated: '2026-09-12'
+method: generated
+source: openapi/agora-real-estate-website-content-api-openapi.yml
+provider: agora-real-estate
+api: agora-real-estate:agora-website-content-api
+skill_count: 2
+note: >-
+  Both skills are grounded in operationIds that exist in the derived specification, which was itself
+  read from Agora's live route index. No skill is written for the Agora client platform API or for
+  the announced MCP surface — neither publishes a contract to ground one in.
+skills:
+- name: track-agora-releases
+  file: agora-real-estate-track-agora-releases.md
+  description: >-
+    Read Agora's public release calendar from its own API and report what shipped, what is scheduled,
+    and which entries touch the API or MCP surface.
+  operations:
+  - getAgoraV1GetAiNewReleasesPosts
+  - getAgoraV1GetAiNewReleasesFilters
+  - getWpV2AiNewRelease
+- name: pull-agora-content
+  file: agora-real-estate-pull-agora-content.md
+  description: >-
+    Pull Agora's published articles, case studies and author profiles by slug, by category, or as a
+    paged collection.
+  operations:
+  - getAgoraV1GetCategories
+  - getAgoraV1PostsByCategorySlugOrId
+  - getAgoraV1GetPostsByPostSlug
+  - getAgoraV1GetCaseStudyByPostSlug
+  - getAgoraV1GetAllAuthors
+  - getAgoraV1GetAuthorByAuthorSlug
+  - getAgoraV1Sitemap
+  - getWpV2Posts
+  - getWpV2CaseStudy
+  - getWpV2Search

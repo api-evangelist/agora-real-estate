@@ -64,5 +64,23 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Agora Real Estate is a company surfaced via the API Evangelist harvest backlog (source: secondary-market) and added to the network as a stub for full-pipeline profiling.
-- https://www.nasdaqprivatemarket.com/
+Agora (**[agorareal.com](https://agorareal.com/)**) is a real estate investment management platform
+for general partners, syndicators, owners/operators and investment firms — fundraising and investor
+onboarding, an investor portal and investor CRM, digital subscriptions, data rooms, cap table and
+transaction management, waterfall automation, capital calls, ACH and cross-border payments, K-1 and
+document management, investor reporting, and integrated fund accounting, bookkeeping and tax
+services. Pricing starts at $749/month (Essential); Pro and Enterprise are quoted.
+
+## What this profile found (2026-09-12)
+
+| Surface | Status |
+|---|---|
+| **Agora Website Content API** — `https://websiteapi.agorareal.com/wp-json` | **Public and callable anonymously.** Headless WordPress with a first-party `agora/v1` namespace of 25 Agora-authored routes. No OpenAPI is published by Agora; the specification in `openapi/` was **derived** from the live self-describing route index (HTTP 200, 326,828 bytes). |
+| **Agora Authorization Server** — `https://auth.agorareal.com` | **Discovery documents public.** OpenID Connect discovery and RFC 8414 authorization-server metadata both served anonymously; authorization-code + PKCE S256, device code, refresh token; scopes `openid profile email offline_access`. |
+| **Agora Client Platform API** — `https://{tenant}.acp.agorareal.com/api` | **Gated.** Multi-tenant (390 client-platform hosts and 389 investor-portal hosts in certificate transparency). Every anonymous `/api/*` request returns nginx 502. "API Access" is an Enterprise line item on the pricing page marked *Priced Separately*, with no public reference. |
+| **MCP / agent surface** | **Announced, not shipped.** Agora's own release feed schedules "API + MCP" for **2026-09-22** and "Agora Connect" for 2026-10-06; Cortex is waitlist-only. No MCP endpoint answers on any host today, so no `MCPServer` pointer is claimed. |
+| **Compliance** | SOC 2 Type II, SOC 1, ISO 27001:2022 and GDPR, all *fully implemented* per Agora's own Scytale-hosted trust center at [trust.agorareal.com](https://trust.agorareal.com/). |
+
+Not found anywhere: a developer portal, API reference, security.txt, status page, agent card, SDK on
+any package registry, or any published rate limit. The one programmatic write path a third party can
+reach today is Agora's Zapier app.

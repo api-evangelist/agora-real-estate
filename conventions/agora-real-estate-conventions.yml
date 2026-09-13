@@ -1,0 +1,111 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  openapi/agora-real-estate-website-content-api-openapi.yml (derived from
+  https://websiteapi.agorareal.com/wp-json) plus live header and error observation on that host,
+  2026-09-12.
+scope: >-
+  These conventions describe the ONE API Agora serves publicly — the website content API. The
+  tenant client-platform API and the announced "API + MCP" product surface are not documented by the
+  provider and no convention is asserted for them.
+auth_style:
+  summary: Anonymous for reads; WordPress session nonce or application-password Basic auth for writes.
+  header: Authorization / X-WP-Nonce
+  evidence: >-
+    Access-Control-Allow-Headers on every response: Authorization, X-WP-Nonce, Content-Disposition,
+    Content-MD5, Content-Type.
+  cross_ref: authentication/agora-real-estate-authentication.yml
+pagination:
+  style: page-number
+  params:
+  - name: page
+    default: 1
+    minimum: 1
+  - name: per_page
+    default: 10
+    minimum: 1
+    maximum: 100
+  - name: offset
+  - name: order
+    enum: [asc, desc]
+  - name: orderby
+  response_headers:
+  - name: X-WP-Total
+    description: Total matching records. Observed value 365 on /wp/v2/posts.
+  - name: X-WP-TotalPages
+    description: Total pages available at the requested per_page.
+  - name: Link
+    description: RFC 8288 links with rel="next" / rel="prev".
+  exposed_to_browsers: true
+  evidence: https://websiteapi.agorareal.com/wp-json/wp/v2/posts?per_page=1
+filtering_and_expansion:
+  field_selection:
+    param: _fields
+    note: Standard WordPress sparse-fieldset parameter; supported by the runtime but not declared per-route in the index.
+  embedding:
+    param: _embed
+    note: Expands _links into _embedded resources (author, featured media, terms).
+  context:
+    param: context
+    enum: [view, embed, edit]
+    default: view
+    note: Controls which fields are returned; edit requires authentication.
+  search:
+    params: [search, search_columns, search_semantics, slug, include, exclude, after, before, modified_after, modified_before]
+  taxonomy_filters:
+    note: >-
+      Collection routes accept taxonomy filters by term id — posts take categories/tags, case-study
+      takes case-study-tag and case_study_taxonomy, ai-new-release takes release_product,
+      release_update_type, release_audience and release_plan — each with an _exclude twin and a
+      tax_relation (AND/OR) combiner.
+metadata:
+  param: meta
+  note: Arbitrary registered meta fields are accepted on write routes.
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation header is returned. An agent has no handle to quote in a support ticket.
+versioning:
+  style: path namespace
+  examples: [/agora/v1, /wp/v2, /oembed/1.0]
+  cross_ref: lifecycle/agora-real-estate-lifecycle.yml
+error_envelope:
+  format: wordpress-rest
+  media_type: application/json
+  shape: '{"code": "<machine_code>", "message": "<human text>", "data": {"status": <http_status>}}'
+  rfc9457: false
+  cross_ref: errors/agora-real-estate-problem-types.yml
+  evidence: https://websiteapi.agorareal.com/wp-json/agora/v1/nope-does-not-exist
+rate_limit_signaling:
+  headers: []
+  note: No X-RateLimit-*, no RateLimit-*, no Retry-After on any observed response.
+  cross_ref: rate-limits/agora-real-estate-rate-limits.yml
+idempotency:
+  coverage: none
+  scope: []
+  mechanism: null
+  header: null
+  retention: null
+  note: >-
+    No Idempotency-Key header, no client-supplied request identifier and no replay-protection
+    mechanism appears in the live route index, in any response header, or anywhere in Agora's public
+    material. The three declared write routes in the first-party namespace
+    (/agora/v1/positionpost, /positionput, /positiondelete) offer no replay protection, and neither
+    do the stock wp/v2 write routes. A retried POST creates a second record.
+dry_run_mode:
+  supported: false
+  note: No preview, validate-only or dry-run parameter is declared on any route.
+reversibility:
+  grade: na
+  reversal_paths: []
+  note: >-
+    The publicly reachable surface is read-only — every route that answers anonymously is a GET, and
+    no anonymous caller can create, modify or delete anything. The route index does declare write
+    routes (POST/PUT/DELETE on /agora/v1/position*, and the stock wp/v2 write verbs), but they are
+    authentication-gated, undocumented by Agora, and not exercisable by an integrator. WordPress's
+    own delete semantics support a trash-then-restore path via the force parameter, but Agora
+    publishes no statement of it and no window, so no reversal operation and no window is asserted
+    here. Re-grade if the announced 2026-09-22 "API + MCP" release ships a documented write surface.
+gaps:
+- No developer documentation states any of these conventions — all of it was read off the wire.
+- No request-id header, so failures are not traceable by a caller.
+- No idempotency and no dry-run, so an agent cannot safely retry or rehearse a write.

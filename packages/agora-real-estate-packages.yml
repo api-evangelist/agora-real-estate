@@ -1,0 +1,62 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  Registry searches on npm, PyPI, RubyGems, NuGet, Packagist and crates.io, plus a read of
+  agorareal.com (76-page sitemap), the pricing comparison matrix and the AgoraReal GitHub
+  organization, 2026-09-12.
+package_count: 0
+official_sdk_count: 0
+packages: []
+summary: >-
+  Agora publishes no client library on any package registry. Every "agora" hit on npm belongs to
+  Agora.io, the unrelated real-time-communications company (@agora-js/*, agora-rtc-sdk-ng,
+  react-native-agora); an exact search for "agorareal" returns zero results on npm, and
+  agorareal / agora-real-estate are absent from PyPI, RubyGems, NuGet and crates.io. The only
+  integration artifact Agora ships is a Zapier app.
+registries_checked:
+- registry: npm
+  query: agorareal
+  results: 0
+- registry: npm
+  query: agora-real-estate
+  results: 0 first-party (all hits belong to agora.io, a different company)
+- registry: pypi
+  query: agorareal / agora-real-estate
+  status: 404
+- registry: rubygems
+  query: agorareal
+  status: 404
+- registry: nuget
+  query: agorareal
+  results: 0
+- registry: crates.io
+  query: agorareal
+  results: 0
+- registry: packagist
+  query: agorareal
+  results: 0 first-party
+non_registry_distribution:
+- name: Agora for Zapier
+  kind: no-code integration
+  official: true
+  url: https://zapier.com/apps/agora/integrations
+  registry: zapier
+  version: null
+  published: null
+  note: >-
+    Agora's own Zapier app — "Agora helps real estate firms accelerate their growth and exceed
+    investors' expectations with digital transformation" — currently exposing a single action, Create
+    Contact as Lead (email, first name, last name, phone, lead source). Zapier publishes no version
+    or release date for app integrations, so both fields are recorded null rather than guessed. This
+    is the only publicly reachable programmatic write path into the Agora platform.
+  evidence:
+  - url: https://zapier.com/apps/agora/integrations
+    status: 200
+github:
+  organization: https://github.com/AgoraReal
+  public_repos: 1
+  note: >-
+    An AgoraReal GitHub organization exists (created 2021-11-11) but carries one unrelated public
+    repository, a PhantomJS binary tarball fork, with no name, description, website or link from
+    agorareal.com. No GitHubOrganization pointer is emitted: ownership is plausible but unproven, and
+    nothing there is a developer surface.

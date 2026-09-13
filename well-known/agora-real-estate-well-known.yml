@@ -1,0 +1,224 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Anonymous HTTP probe of ten /.well-known/ paths on every Agora host discovered in this pass — the
+  apex and www, the headless-WordPress content host, the authorization server, the AWS API Gateway
+  host, the Cortex sign-in host and the trust center — each with a nonsense control path, 2026-09-12.
+summary: >-
+  Agora serves exactly two /.well-known/ documents, both on its own authorization server at
+  auth.agorareal.com: OpenID Connect discovery and RFC 8414 OAuth authorization-server metadata.
+  Both are real JSON documents and the control probe on that host returns 404, so they are served,
+  not caught. No other host serves anything: the apex and www return a 190KB Next.js 404 body for
+  every path, the WordPress content host returns a 1,665-byte 404, app.agorareal.com returns the AWS
+  API Gateway {"message":"Not Found"} for every path, and cortex.agorareal.com (WorkOS AuthKit) and
+  trust.agorareal.com (Scytale) are single-page apps that answer 200 with the same shell for EVERY
+  path including the control probe. No security.txt, no api-catalog, no agent card anywhere.
+hit_count: 2
+soft_404_control:
+  note: >-
+    The nonsense path /.well-known/zzz-api-evangelist-control-7c41 was requested on every host. Where
+    it returned the same status and body size as the real well-known paths, every 200 or 404 on that
+    host is a catch-all and no document exists there.
+  probes:
+  - host: https://cortex.agorareal.com
+    path: /.well-known/zzz-api-evangelist-control-7c41
+    status: 200
+    bytes: 145821
+    note: identical 145,821-byte AuthKit shell as all nine real probes — SPA catch-all, not documents
+  - host: https://trust.agorareal.com
+    path: /.well-known/zzz-api-evangelist-control-7c41
+    status: 200
+    bytes: 545
+    body_sha256_prefix: 15124bf03fd3
+    note: identical body hash to all nine real probes — Scytale trust-center SPA catch-all
+  - host: https://auth.agorareal.com
+    path: /.well-known/zzz-api-evangelist-control-7c41
+    status: 404
+    bytes: 60
+    note: >-
+      genuine 404 {"error":"not_found"} — proves the two 200s on this host are served documents,
+      not a catch-all
+hosts:
+- host: https://auth.agorareal.com
+  note: >-
+    Agora's OAuth 2.0 / OpenID Connect authorization server (WorkOS AuthKit on Agora's own domain,
+    issuer https://auth.agorareal.com). Two real documents served anonymously.
+  documents:
+  - path: /.well-known/openid-configuration
+    status: 200
+    file: agora-real-estate-auth-openid-configuration.json
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    file: agora-real-estate-auth-oauth-authorization-server.json
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+- host: https://agorareal.com
+  note: Next.js marketing front end. Genuine 404s (190KB 404 body) — no catch-all, no documents.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+- host: https://www.agorareal.com
+  note: Identical bodies to the apex — same origin, same absence.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+- host: https://websiteapi.agorareal.com
+  note: >-
+    Headless WordPress content host serving the public /wp-json route index. Genuine 1,665-byte 404s
+    on every /.well-known/ path.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+- host: https://app.agorareal.com
+  note: >-
+    AWS API Gateway custom domain. Returns {"message":"Not Found"} (23 bytes) for every path
+    including the control probe — nothing is discoverable anonymously.
+  documents:
+  - path: /.well-known/security.txt
+    status: 404
+  - path: /.well-known/openid-configuration
+    status: 404
+  - path: /.well-known/oauth-authorization-server
+    status: 404
+  - path: /.well-known/oauth-protected-resource
+    status: 404
+  - path: /.well-known/api-catalog
+    status: 404
+  - path: /.well-known/ai-plugin.json
+    status: 404
+  - path: /.well-known/agent-card.json
+    status: 404
+  - path: /.well-known/agent.json
+    status: 404
+  - path: /.well-known/aauth-resource.json
+    status: 404
+- host: https://cortex.agorareal.com
+  note: >-
+    Cortex sign-in host (WorkOS hosted AuthKit). Every path returns HTTP 200 with the same
+    145,821-byte app shell, control probe included. NOT documents — no file saved. The host redirects
+    to https://auth.agorareal.com for the real authorization flow.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    catch_all: true
+  - path: /.well-known/openid-configuration
+    status: 200
+    catch_all: true
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    catch_all: true
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    catch_all: true
+  - path: /.well-known/api-catalog
+    status: 200
+    catch_all: true
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/agent-card.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/agent.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    catch_all: true
+- host: https://trust.agorareal.com
+  note: >-
+    Scytale-hosted trust center SPA. Every path returns HTTP 200 with the same 545-byte shell,
+    control probe included. NOT documents — no file saved.
+  documents:
+  - path: /.well-known/security.txt
+    status: 200
+    catch_all: true
+  - path: /.well-known/openid-configuration
+    status: 200
+    catch_all: true
+  - path: /.well-known/oauth-authorization-server
+    status: 200
+    catch_all: true
+  - path: /.well-known/oauth-protected-resource
+    status: 200
+    catch_all: true
+  - path: /.well-known/api-catalog
+    status: 200
+    catch_all: true
+  - path: /.well-known/ai-plugin.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/agent-card.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/agent.json
+    status: 200
+    catch_all: true
+  - path: /.well-known/aauth-resource.json
+    status: 200
+    catch_all: true
+pointer_policy: >-
+  A WellKnown pointer IS emitted in apis.yml because auth.agorareal.com serves two real documents,
+  proven against a 404 control probe on the same host. No SecurityTxt pointer is emitted — no host
+  serves /.well-known/security.txt. No AgentCard pointer is emitted — every agent-card 200 recorded
+  above is a single-page-app catch-all, and nothing parses as an AgentCard.

@@ -1,0 +1,75 @@
+generated: '2026-09-12'
+method: searched
+source: https://agorareal.com/pricing/
+currency: USD
+plan_count: 3
+billing_period: monthly
+summary: >-
+  Agora publishes a three-tier subscription with one real number on it: Essential starts from
+  $749/month. Pro and Enterprise are quote-only ("Book a demo" / "Talk to an expert"). The full
+  feature matrix IS published per tier, and several capabilities — including API access — are marked
+  "Priced Separately" rather than being included in any tier.
+plans:
+- name: Essential
+  price: 749
+  price_qualifier: from
+  currency: USD
+  period: month
+  availability: published
+  description: End-to-end platform for real estate firms and syndicators.
+  includes:
+  - Investor Portal
+  - Investor CRM
+  - Fundraising Suite
+  - Smart Questionnaire
+  - Report Builder
+  - Templates Library
+  - Document and K-1 management
+  - Cap table and transactions
+  - Waterfall automation
+  - Integrated payments
+  - Dedicated customer success team
+- name: Pro
+  price: null
+  currency: USD
+  period: month
+  availability: quote-only
+  description: >-
+    Everything in Essential plus advanced fundraising, institutional-grade data room, email
+    marketing, Report Builder Pro widgets, institutional report types, open-end fund accounting, free
+    embedded ACH payments, advanced waterfall tools, enhanced permissions and document security,
+    single sign-on, early feature access and paid professional services.
+- name: Enterprise
+  price: null
+  currency: USD
+  period: month
+  availability: quote-only
+  description: >-
+    Everything in Pro plus an enhanced SLA, data warehouse exports, custom integrations, white-glove
+    onboarding, tailor-made solutions and strategic roadmap input.
+add_ons:
+- name: API Access
+  tier: Enterprise
+  price: null
+  pricing_model: priced-separately
+  description: >-
+    "Utilize Agora's robust APIs for smooth data synchronization." Listed in the Enterprise column of
+    the published comparison matrix and marked "Priced Separately" — it is neither included in a tier
+    nor quoted publicly, and no reference or specification backs it.
+- name: Data Warehouse Exports
+  tier: Enterprise
+  price: null
+  pricing_model: priced-separately
+- name: Accounting Systems Integration
+  tier: Enterprise
+  price: null
+  pricing_model: priced-separately
+free_tier: false
+trial: false
+self_serve_signup: false
+signup_note: >-
+  No self-serve signup exists. Every tier routes to a demo booking form; the only public self-service
+  entry point on the site is the Cortex waitlist at https://agorareal.com/waitlist-signup/.
+evidence:
+- url: https://agorareal.com/pricing/
+  status: 200

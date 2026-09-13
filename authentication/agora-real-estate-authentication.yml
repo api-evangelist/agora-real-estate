@@ -1,0 +1,100 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://auth.agorareal.com/.well-known/openid-configuration and
+  /.well-known/oauth-authorization-server (both HTTP 200, 2026-09-12), plus live header and error
+  observation on https://websiteapi.agorareal.com/wp-json and the tenant client-platform hosts.
+summary: >-
+  Agora runs three distinct authentication surfaces and documents none of them for developers. The
+  public website content API is anonymous for reads and uses stock WordPress credentials for writes.
+  The Cortex AI product authenticates through a full OAuth 2.0 / OpenID Connect authorization server
+  on Agora's own domain. The tenant client platform authenticates through AWS Cognito behind a
+  session the API gateway will not route without.
+surfaces:
+- name: Agora Website Content API
+  api: agora-real-estate:agora-website-content-api
+  base_url: https://websiteapi.agorareal.com/wp-json
+  anonymous_read: true
+  note: >-
+    Every sampled GET on agora/v1 and the public wp/v2 read routes returned 200 with real data and no
+    credential. Write and privileged routes return 401 — observed {"code":"rest_not_logged_in"} on
+    /wp/v2/users/me and {"code":"rest_forbidden"} on /wp/v2/settings.
+  schemes:
+  - type: apiKey
+    in: header
+    name: X-WP-Nonce
+    description: >-
+      WordPress cookie-authentication nonce. Not documented by Agora; advertised by the API itself in
+      the Access-Control-Allow-Headers response header (Authorization, X-WP-Nonce,
+      Content-Disposition, Content-MD5, Content-Type).
+    evidence: https://websiteapi.agorareal.com/wp-json/agora/v1/get-categories
+  - type: http
+    scheme: basic
+    description: >-
+      WordPress application passwords over HTTP Basic in the Authorization header — the route index
+      declares /wp/v2/users/{user_id}/application-passwords, so the feature is enabled on this
+      install. Applies to write routes only.
+    evidence: https://websiteapi.agorareal.com/wp-json
+- name: Agora Authorization Server (Cortex)
+  api: agora-real-estate:agora-authorization-server
+  base_url: https://auth.agorareal.com
+  schemes:
+  - type: openIdConnect
+    openIdConnectUrl: https://auth.agorareal.com/.well-known/openid-configuration
+    issuer: https://auth.agorareal.com
+    description: >-
+      OpenID Connect discovery served anonymously. RS256 ID tokens, public subject type, userinfo at
+      /oauth2/userinfo, introspection at /oauth2/introspection, JWKS at /oauth2/jwks.
+    evidence: https://auth.agorareal.com/.well-known/openid-configuration
+  - type: oauth2
+    flows:
+      authorizationCode:
+        authorizationUrl: https://auth.agorareal.com/oauth2/authorize
+        tokenUrl: https://auth.agorareal.com/oauth2/token
+        refreshUrl: https://auth.agorareal.com/oauth2/token
+        scopes:
+          openid: OpenID Connect authentication
+          profile: Basic profile claims
+          email: Email address claim
+          offline_access: Refresh-token issuance
+      clientCredentials:
+        tokenUrl: https://auth.agorareal.com/oauth2/token
+        scopes: {}
+      deviceCode:
+        deviceAuthorizationUrl: https://auth.agorareal.com/oauth2/device_authorization
+        tokenUrl: https://auth.agorareal.com/oauth2/token
+        scopes: {}
+    pkce:
+      required_by_metadata: false
+      code_challenge_methods_supported:
+      - S256
+    token_endpoint_auth_methods_supported:
+    - none
+    - client_secret_basic
+    - client_secret_post
+    description: >-
+      RFC 8414 authorization-server metadata served anonymously. The deviceCode flow is not an
+      OpenAPI-standard flow key and is recorded here as declared by the provider
+      (urn:ietf:params:oauth:grant-type:device_code). client_credentials appears in the OIDC
+      discovery document's grant_types_supported but not in the RFC 8414 document — recorded as the
+      provider publishes it, not reconciled.
+    evidence: https://auth.agorareal.com/.well-known/oauth-authorization-server
+  deployment_note: >-
+    The authorization server is a WorkOS AuthKit instance served on Agora's own domain — the Cortex
+    sign-in host cortex.agorareal.com 303s to https://auth.agorareal.com/?client_id=client_01K8C8...
+    with a redirect_uri back to /auth/callback. Public client registration is not offered.
+- name: Agora Client Platform API
+  api: agora-real-estate:agora-client-platform-api
+  base_url: https://{tenant}.acp.agorareal.com/api
+  schemes: []
+  note: >-
+    No scheme can be established from the outside. Every anonymous request to /api and /api/* on the
+    demo tenant and on sampled live tenants returned nginx 502 with no WWW-Authenticate challenge.
+    The client-platform bundle calls /api/admin/cognito/* routes, so AWS Cognito is the identity
+    provider, but Agora publishes no authentication documentation for this API.
+gaps:
+- No developer-facing authentication documentation exists on agorareal.com.
+- No API-key issuance, client registration or token guide is published for any surface.
+- >-
+    No /.well-known/oauth-protected-resource is served on any host, so no resource server advertises
+    which authorization server protects it.

@@ -1,0 +1,34 @@
+generated: '2026-09-12'
+method: probed
+source: https://auth.agorareal.com/.well-known/openid-configuration
+docs: null
+summary: >-
+  The only scope surface Agora publishes is the scopes_supported list on its own OAuth 2.0 / OpenID
+  Connect authorization server at auth.agorareal.com. These are the four standard OIDC scopes — no
+  product or resource scopes (no read/write, no fund/investor/document scopes) are advertised, which
+  is consistent with the authorization server currently fronting interactive Cortex sign-in rather
+  than a public API. There is no published scopes or permissions reference page.
+authorization_server: https://auth.agorareal.com
+scope_count: 4
+scopes:
+- name: openid
+  description: Requests an OpenID Connect ID token. Standard OIDC scope.
+  standard: true
+- name: profile
+  description: Requests basic profile claims (name, picture, updated_at). Standard OIDC scope.
+  standard: true
+- name: email
+  description: Requests the email and email_verified claims. Standard OIDC scope.
+  standard: true
+- name: offline_access
+  description: Requests a refresh token so the client can act after the user leaves. Standard OIDC scope.
+  standard: true
+evidence:
+- url: https://auth.agorareal.com/.well-known/openid-configuration
+  status: 200
+- url: https://auth.agorareal.com/.well-known/oauth-authorization-server
+  status: 200
+note: >-
+  Derived from the discovery documents rather than from an OpenAPI — Agora's specs declare no oauth2
+  securityScheme, because the one public specification in this repo describes the anonymous website
+  content API. No scope reference page exists to upgrade this file to method: searched.

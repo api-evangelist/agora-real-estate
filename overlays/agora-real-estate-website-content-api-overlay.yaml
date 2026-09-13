@@ -1,0 +1,72 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — Agora Website Content API
+  version: 1.0.0
+  x-generated: '2026-09-12'
+  x-method: generated
+  x-source: openapi/agora-real-estate-website-content-api-openapi.yml
+extends: ./../openapi/agora-real-estate-website-content-api-openapi.yml
+actions:
+- target: $.info
+  description: >-
+    Record that the underlying document is derived from the provider's live self-describing route
+    index rather than published by the provider, and point at the artifacts that carry the runtime
+    semantics the route index does not declare.
+  update:
+    x-apievangelist:
+      profile: https://apis.io/providers/agora-real-estate/
+      contract_origin: derived-from-wordpress-route-index
+      contract_origin_url: https://websiteapi.agorareal.com/wp-json
+      provider_publishes_openapi: false
+      conventions: conventions/agora-real-estate-conventions.yml
+      errors: errors/agora-real-estate-problem-types.yml
+      data_model: data-model/agora-real-estate-data-model.yml
+      authentication: authentication/agora-real-estate-authentication.yml
+      rate_limits: rate-limits/agora-real-estate-rate-limits.yml
+- target: $.servers
+  description: Annotate the single production server with what is and is not reachable anonymously.
+  update:
+  - url: https://websiteapi.agorareal.com/wp-json
+    description: >-
+      Agora headless WordPress REST API (production). Read routes answer anonymously; write routes
+      require a WordPress session Agora does not issue to integrators.
+    x-anonymous-read: true
+    x-anonymous-write: false
+- target: $.paths['/wp/v2/posts'].get
+  description: Record the observed collection size and the pagination signal a caller should follow.
+  update:
+    x-observed:
+      total_records: 365
+      total_header: X-WP-Total
+      observed_at: '2026-09-12'
+    x-pagination:
+      style: page-number
+      next_link_header: 'Link: <...&page=N>; rel="next"'
+- target: $.paths['/agora/v1/get_ai_new_releases_posts'].get
+  description: >-
+    Flag the first-party release feed as the machine-readable form of Agora's public release
+    calendar — the artifact the changelog in this repo is built from.
+  update:
+    x-apievangelist:
+      role: release-calendar
+      human_equivalent: https://agorareal.com/season-of-innovation/
+      changelog_artifact: changelog/agora-real-estate-changelog.yml
+- target: $.paths['/agora/v1/positionpost'].post
+  description: >-
+    Mark the write routes as gated and replay-unsafe. No idempotency mechanism exists on this API and
+    no reversal operation is documented.
+  update:
+    x-agentic-access:
+      action_class: write
+      consequence: creates a public careers position record
+      idempotent: false
+      reversible: undocumented
+      escalation: human-approval
+      note: >-
+        Authentication-gated and undocumented by the provider. Recorded, not recommended for agent
+        use.
+- target: $.components.schemas.RestError
+  description: Mark the error envelope as non-RFC-9457 so a generator does not treat it as problem+json.
+  update:
+    x-rfc9457: false
+    x-branch-on: code

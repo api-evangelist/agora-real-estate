@@ -1,0 +1,51 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://trust.agorareal.com/ and its own public data endpoint
+  https://api.scytale.ai/views/trust-center/public/page-data (HTTP 200, requested with the trust
+  center's Origin), plus https://agorareal.com/security-and-privacy/ (HTTP 200), 2026-09-12.
+url: https://trust.agorareal.com/
+platform: Scytale
+platform_note: >-
+  The trust center is a Scytale-hosted single-page app on Agora's own domain. The page itself renders
+  client-side, so the certification list was read from the public page-data document the app fetches,
+  not asserted from the HTML shell.
+summary: >-
+  Agora publishes a trust center listing four compliance frameworks, all marked fully implemented,
+  and describes the controls behind them on its own security page. Document downloads (SOC reports,
+  policies) are gated behind a "Request Access" form; no policy or report file is public.
+certifications:
+- name: SOC 2 Type II
+  id: soc2-type2
+  status: fully-implemented
+  source: trust-center
+- name: SOC 1
+  id: soc1
+  status: fully-implemented
+  source: trust-center
+- name: ISO 27001:2022
+  id: iso27001-2022
+  status: fully-implemented
+  source: trust-center
+- name: GDPR
+  id: gdpr-2024
+  status: fully-implemented
+  source: trust-center
+controls_published:
+- Periodic external audits, penetration testing and vulnerability scanning
+- WAF firewall and two-factor authentication
+- 256-bit AES at rest and TLS in transit
+- Automatic database and S3 backup with system redundancy
+- Subprocessor register — 26 vendors listed with name, purpose and processing locations
+documents_public: false
+documents_note: >-
+  reportFiles and policies are empty in the public payload and the trust center exposes a
+  "Request Access" dialog (full name, company, email) for restricted files — certifications are
+  named publicly, the evidence behind them is not.
+evidence:
+- url: https://trust.agorareal.com/
+  status: 200
+- url: https://api.scytale.ai/views/trust-center/public/page-data
+  status: 200
+- url: https://agorareal.com/security-and-privacy/
+  status: 200

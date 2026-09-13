@@ -1,0 +1,98 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts (HTTP 200) — Agora's
+  own machine-readable release feed — cross-read against https://agorareal.com/season-of-innovation/
+  and https://agorareal.com/product-updates/ (both HTTP 200), 2026-09-12.
+scheme: dated-release-calendar
+current_version: null
+versioning_note: >-
+  Agora publishes no version numbers for its platform. Releases are dated calendar entries, tagged by
+  product area (release_product) and change type (release_update_type: New product, New feature,
+  Feature upgrade) in a first-party taxonomy that is exposed through the API.
+human_url: https://agorareal.com/season-of-innovation/
+machine_url: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+cadence: >-
+  "Season of Innovation" — one announced release every two weeks from 11 August 2026 through 15
+  December 2026. Entries dated after 2026-09-12 are scheduled, not shipped.
+entry_count: 10
+entries:
+- date: '2026-08-11'
+  title: Cortex
+  product: Cortex
+  type: New product
+  shipped: true
+  breaking: false
+  highlights: >-
+    Announcement of Cortex, Agora's AI work surface for real estate investment management; waitlist
+    opened, general availability stated as December.
+- date: '2026-08-25'
+  title: Signal
+  product: Signal
+  type: New feature
+  shipped: true
+  breaking: false
+  highlights: An intelligence layer over Agora that turns operational data into real-time insights.
+- date: '2026-09-08'
+  title: Bookkeeping Center
+  product: Accounting
+  type: Feature upgrade
+  shipped: true
+  breaking: false
+  highlights: >-
+    GP-facing workspace inside Agora for books status, tasks, communication and financial reports;
+    brings Agora Accounting Services into the product.
+- date: '2026-09-22'
+  title: API + MCP
+  product: AI
+  type: New feature
+  shipped: false
+  breaking: false
+  highlights: >-
+    Scheduled. "Bring your own AI model directly into Agora's data and workflows through MCP." The
+    first public API/agent surface Agora has committed to a date.
+- date: '2026-10-06'
+  title: Agora Connect
+  product: AI
+  type: New feature
+  shipped: false
+  breaking: false
+  highlights: Scheduled. AI-powered answers delivered into the systems a firm's team already uses.
+- date: '2026-10-20'
+  title: Magic Onboarding
+  product: AI
+  type: New feature
+  shipped: false
+  breaking: false
+  highlights: Scheduled. Real-time sync and assessment of a new client's data from day one.
+- date: '2026-11-03'
+  title: Mobile App
+  product: CRM
+  type: New product
+  shipped: false
+  breaking: false
+  highlights: Scheduled. CRM and deal activity on mobile.
+- date: '2026-11-17'
+  title: New Portal
+  product: Investor Portal
+  type: Feature upgrade
+  shipped: false
+  breaking: false
+  highlights: Scheduled. Redesigned Investor Portal with deeper customization to follow.
+- date: '2026-12-01'
+  title: Asset-Level Reporting
+  product: Assets
+  type: Feature upgrade
+  shipped: false
+  breaking: false
+  highlights: Scheduled. Reporting below the fund level, down to the individual asset.
+- date: '2026-12-15'
+  title: Cortex
+  product: Cortex
+  type: New product
+  shipped: false
+  breaking: false
+  highlights: Scheduled. General availability of Cortex, consolidating the season's releases.
+gaps:
+- No API changelog exists — the release feed is a product calendar, not a contract change log.
+- No version numbers, no breaking-change notices and no deprecation entries are published.

@@ -1,0 +1,58 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Read of https://agorareal.com/season-of-innovation/, /pricing/, /terms-conditions/ and
+  /security-and-privacy/ (all HTTP 200), the live release feed at
+  https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts, and DNS/HTTP probes
+  for a status page, 2026-09-12.
+summary: >-
+  Agora runs a dated, published release calendar and an SLA it sells, but publishes no API lifecycle
+  of any kind: no versioning policy, no deprecation policy, no Sunset/Deprecation headers, and no
+  status page. Nothing in the one public specification is marked deprecated, because the contract
+  itself is undeclared by the provider — it was derived here from a live route index.
+versioning:
+  policy_url: null
+  scheme: >-
+    The public content API is versioned by WordPress namespace (wp/v2, agora/v1, oembed/1.0). Agora
+    ships a first-party agora/v1 namespace, so a v2 path is available to it, but no policy states
+    what a version bump means or how long v1 survives.
+  api_versions:
+  - agora/v1
+  - wp/v2
+  - oembed/1.0
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  deprecated_operations: []
+  note: >-
+    No RFC 8594 Sunset header and no Deprecation header were observed on any sampled response, and no
+    deprecation policy page exists. No Deprecation pointer is emitted.
+status_page:
+  url: null
+  note: >-
+    No status page is published. status.agorareal.com does not resolve in DNS, and no status link
+    appears anywhere in the site nav, footer or 76-page sitemap. No StatusPage pointer is emitted.
+sla:
+  published: false
+  note: >-
+    "Enhanced SLA" is listed as an Enterprise tier benefit on https://agorareal.com/pricing/, but no
+    SLA document, uptime target or credit schedule is public.
+support:
+  url: https://agorareal.com/contact-us/
+  channels:
+  - Contact form and demo booking
+  - Dedicated customer success team (all tiers, per the pricing matrix)
+  - Advanced training and product experts (Pro and above)
+release_calendar:
+  url: https://agorareal.com/season-of-innovation/
+  machine_url: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+  cadence: one release every two weeks, 2026-08-11 through 2026-12-15
+  next_api_relevant_release:
+    date: '2026-09-22'
+    title: API + MCP
+gaps:
+- No versioning policy.
+- No deprecation policy and no Sunset/Deprecation headers.
+- No status page and no public uptime history.
+- No public SLA document.

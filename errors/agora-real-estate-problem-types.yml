@@ -1,0 +1,64 @@
+generated: '2026-09-12'
+method: probed
+source: >-
+  Live anonymous calls against https://websiteapi.agorareal.com/wp-json on 2026-09-12, cross-read
+  with openapi/agora-real-estate-website-content-api-openapi.yml.
+format: wordpress-rest
+media_type: application/json
+rfc9457: false
+envelope:
+  shape: '{"code": "<string>", "message": "<string>", "data": {"status": <integer>}}'
+  fields:
+  - name: code
+    description: Machine-readable error identifier. Stable across WordPress releases.
+  - name: message
+    description: Human-readable sentence. Localized to the site language.
+  - name: data.status
+    description: HTTP status repeated inside the body.
+  note: >-
+    Not RFC 9457 — there is no type URI, no title/detail/instance, and the content type is
+    application/json rather than application/problem+json. The code field is the part an agent should
+    branch on.
+error_count: 4
+errors:
+- code: rest_no_route
+  status: 404
+  message: No route was found matching the URL and request method.
+  cause: The path or the HTTP method is not registered in the route index.
+  remediation: >-
+    Re-read https://websiteapi.agorareal.com/wp-json and confirm the exact route string and method.
+    A GET-only route answers 404, not 405, for a POST.
+  observed: https://websiteapi.agorareal.com/wp-json/agora/v1/nope-does-not-exist
+- code: rest_post_invalid_id
+  status: 404
+  message: Invalid post ID.
+  cause: The record id in the path does not exist or is not readable in the requested context.
+  remediation: List the collection first and use an id from it; ids are integers.
+  observed: https://websiteapi.agorareal.com/wp-json/wp/v2/posts/99999999
+- code: rest_not_logged_in
+  status: 401
+  message: You are not currently logged in.
+  cause: The route requires an authenticated session and none was supplied.
+  remediation: >-
+    These routes are not available to public integrators. Agora issues no API credentials for this
+    surface.
+  observed: https://websiteapi.agorareal.com/wp-json/wp/v2/users/me
+- code: rest_forbidden
+  status: 401
+  message: Sorry, you are not allowed to do that.
+  cause: The route requires a capability the caller does not hold.
+  remediation: Not remediable anonymously — administrative routes only.
+  observed: https://websiteapi.agorareal.com/wp-json/wp/v2/settings
+  note: >-
+    Returned with HTTP 401 rather than 403 on this install, so a client branching on status alone
+    cannot distinguish "not logged in" from "logged in but not permitted". Branch on code.
+other_surfaces:
+- surface: Agora Client Platform API
+  envelope: >-
+    Not observable. Anonymous requests to https://{tenant}.acp.agorareal.com/api/* return an nginx
+    HTML 502 error page, not a JSON envelope.
+- surface: app.agorareal.com (AWS API Gateway)
+  envelope: '{"message":"Not Found"} — the stock API Gateway envelope, with no error code field.'
+gaps:
+- Agora publishes no error reference of any kind.
+- No error code registry, no remediation guidance and no support-ticket identifier in any response.

@@ -1,0 +1,63 @@
+generated: '2026-09-12'
+method: searched
+source: >-
+  https://agorareal.com/cortex/ (HTTP 200) and Agora's own machine-readable release feed at
+  https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts (HTTP 200), plus live
+  MCP probes of every Agora host, 2026-09-12.
+status: announced
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: probed
+summary: >-
+  Agora has ANNOUNCED MCP but has not shipped a reachable server. Its own release feed schedules a
+  release titled "API + MCP" for 22 September 2026 — "Bring your own AI model directly into Agora's
+  data and workflows through MCP" — and a second, "Agora Connect", for 6 October 2026. The Cortex
+  product page repeats the claim ("With MCP, your existing AI tools can use Agora data to answer
+  questions") behind a waitlist. Nothing is callable today: no MCP endpoint answers on any Agora
+  host, and Cortex itself is not generally available.
+tools: []
+tool_count: 0
+announcements:
+- title: API + MCP
+  scheduled: '2026-09-22'
+  product: AI
+  update_type: New feature
+  description: Bring your own AI model directly into Agora's data and workflows through MCP.
+  source: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+- title: Agora Connect
+  scheduled: '2026-10-06'
+  product: AI
+  update_type: New feature
+  description: >-
+    Agora Connect brings AI-powered answers into the systems your team already works in, turning
+    every answer into a starting point.
+  source: https://websiteapi.agorareal.com/wp-json/agora/v1/get_ai_new_releases_posts
+- title: Cortex
+  scheduled: '2026-12-15'
+  product: Cortex
+  update_type: New product
+  description: >-
+    Cortex is Agora's AI work surface for real estate investment management, bringing a season of
+    releases together into one system. Agents Studio, Assistant and Data Workspace; waitlist only.
+  source: https://agorareal.com/cortex/
+probes:
+- url: https://cortex.agorareal.com/mcp
+  method: POST tools/list
+  status: 303
+  note: Redirects to /login — WorkOS AuthKit hosted sign-in, not an MCP endpoint. Every path on this host returns the same app shell.
+- url: https://agorareal.com/mcp
+  status: 404
+- url: https://app.agorareal.com/
+  status: 404
+  note: AWS API Gateway returns {"message":"Not Found"} for every path including a control probe.
+- url: https://auth.agorareal.com/.well-known/oauth-protected-resource
+  status: 404
+  note: No protected-resource metadata advertises an MCP resource server.
+pointer_policy: >-
+  No MCPServer pointer is emitted in apis.yml. The provider has announced MCP with a date but serves
+  no endpoint and ships no package; an MCPServer pointer would assert an agent surface that does not
+  yet exist. Re-probe after 2026-09-22.
