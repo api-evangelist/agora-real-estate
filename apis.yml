@@ -154,26 +154,6 @@ apis:
     url: data-model/agora-real-estate-data-model.yml
   - type: Conventions
     url: conventions/agora-real-estate-conventions.yml
-- aid: agora-real-estate:agora-real-estate-oembed-api
-  name: Agora Real Estate O Embed API
-  description: oEmbed representation of an agorareal.com URL.
-  humanURL: https://agorareal.com/
-  baseURL: https://websiteapi.agorareal.com/wp-json
-  tags:
-  - oEmbed
-  properties:
-  - type: OpenAPI
-    url: openapi/agora-real-estate-oembed-api-openapi.yml
-  - type: Examples
-    url: examples/agora-real-estate-get-categories.json
-  - type: Examples
-    url: examples/agora-real-estate-ai-new-releases-posts.json
-  - type: ErrorCatalog
-    url: errors/agora-real-estate-problem-types.yml
-  - type: DataModel
-    url: data-model/agora-real-estate-data-model.yml
-  - type: Conventions
-    url: conventions/agora-real-estate-conventions.yml
 - aid: agora-real-estate:agora-real-estate-wordpress-content-api
   name: Agora Real Estate WordPress Content API
   description: Public read routes of the stock wp/v2 namespace.
@@ -184,6 +164,26 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/agora-real-estate-wordpress-content-api-openapi.yml
+  - type: Examples
+    url: examples/agora-real-estate-get-categories.json
+  - type: Examples
+    url: examples/agora-real-estate-ai-new-releases-posts.json
+  - type: ErrorCatalog
+    url: errors/agora-real-estate-problem-types.yml
+  - type: DataModel
+    url: data-model/agora-real-estate-data-model.yml
+  - type: Conventions
+    url: conventions/agora-real-estate-conventions.yml
+- aid: agora-real-estate:agora-real-estate-o-embed-api
+  name: Agora Real Estate o Embed API
+  description: oEmbed representation of an agorareal.com URL.
+  humanURL: https://agorareal.com/pricing/
+  baseURL: https://{tenant}.acp.agorareal.com/api
+  tags:
+  - o Embed
+  properties:
+  - type: OpenAPI
+    url: openapi/agora-real-estate-o-embed-api-openapi.yml
   - type: Examples
     url: examples/agora-real-estate-get-categories.json
   - type: Examples
