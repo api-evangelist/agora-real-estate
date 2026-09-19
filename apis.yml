@@ -180,6 +180,8 @@ apis:
   humanURL: https://agorareal.com/pricing/
   baseURL: https://{tenant}.acp.agorareal.com/api
   tags:
+  - oEmbed
+  tags_raw:
   - o Embed
   properties:
   - type: OpenAPI
