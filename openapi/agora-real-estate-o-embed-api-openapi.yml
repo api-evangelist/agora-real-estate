@@ -1,0 +1,129 @@
+openapi: 3.2.0
+info:
+  title: Agora Website Content o Embed API
+  version: '2026-09-12'
+  summary: Agora's public, first-party content API for agorareal.com.
+  description: The anonymous, read-mostly content API behind agorareal.com.
+  contact:
+    name: Agora
+    url: https://agorareal.com/contact-us/
+  x-generated-from: https://websiteapi.agorareal.com/wp-json
+  x-generated-method: derived
+  x-generated-date: '2026-09-12'
+servers:
+- url: https://websiteapi.agorareal.com/wp-json
+  description: Agora headless WordPress REST API (production).
+security:
+- {}
+tags:
+- name: o Embed
+  description: oEmbed representation of an agorareal.com URL.
+paths:
+  /oembed/1.0/embed:
+    get:
+      operationId: getOembed10Embed
+      summary: GET /oembed/1.0/embed
+      tags:
+      - o Embed
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: url
+        in: query
+        required: true
+        description: The URL of the resource for which to fetch oEmbed data.
+        schema:
+          type: string
+          format: uri
+      - name: format
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: json
+      - name: maxwidth
+        in: query
+        required: false
+        description: ''
+        schema:
+          default: 600
+      security:
+      - {}
+components:
+  schemas:
+    RestError:
+      type: object
+      description: WordPress REST error envelope, observed verbatim on live anonymous calls on 2026-09-12.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route, rest_post_invalid_id, rest_forbidden, rest_not_logged_in.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code repeated in the body.
+      required:
+      - code
+      - message
+      examples:
+      - code: rest_no_route
+        message: No route was found matching the URL and request method.
+        data:
+          status: 404
+  securitySchemes:
+    cookieNonce:
+      type: apiKey
+      in: header
+      name: X-WP-Nonce
+      description: WordPress cookie-authentication nonce. Advertised by the API in Access-Control-Allow-Headers; applies to write routes only.
+    basicAuth:
+      type: http
+      scheme: basic
+      description: WordPress application passwords sent as HTTP Basic in the Authorization header. Advertised in Access-Control-Allow-Headers; applies to write routes only.

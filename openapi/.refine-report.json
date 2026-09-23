@@ -1,0 +1,25 @@
+{
+  "provider": "agora-real-estate",
+  "sources": [
+    "agora-real-estate-agora-content-api-openapi.yml",
+    "agora-real-estate-o-embed-api-openapi.yml",
+    "agora-real-estate-wordpress-content-api-openapi.yml"
+  ],
+  "outputs": [
+    "agora-real-estate-agora-content-api-openapi.yml",
+    "agora-real-estate-o-embed-api-openapi.yml",
+    "agora-real-estate-wordpress-content-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [
+    "agora-real-estate-agora-content-api-openapi.yml: previously refined output kept for 25 operation(s) no archived document covers (e.g. /agora/v1/Carrers get, /agora/v1/all_categories get, /agora/v1/fetch-theme-setting get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "agora-real-estate-o-embed-api-openapi.yml: previously refined output kept for 1 operation(s) no archived document covers (e.g. /oembed/1.0/embed get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth.",
+    "agora-real-estate-wordpress-content-api-openapi.yml: previously refined output kept for 38 operation(s) no archived document covers (e.g. /wp/v2/agora-authors get, /wp/v2/agora-authors/{id} get, /wp/v2/ai-new-release get); its other 0 operation(s) came from the archive and were dropped from it. The archive is incomplete for this provider \u2014 re-harvest to restore _original/ as the full source of truth."
+  ],
+  "notes": [
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": []
+}

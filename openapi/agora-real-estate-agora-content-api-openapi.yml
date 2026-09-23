@@ -1,0 +1,1395 @@
+openapi: 3.2.0
+info:
+  title: Agora Website Content Agora Content API
+  version: '2026-09-12'
+  summary: Agora's public, first-party content API for agorareal.com.
+  description: The anonymous, read-mostly content API behind agorareal.com.
+  contact:
+    name: Agora
+    url: https://agorareal.com/contact-us/
+  x-generated-from: https://websiteapi.agorareal.com/wp-json
+  x-generated-method: derived
+  x-generated-date: '2026-09-12'
+servers:
+- url: https://websiteapi.agorareal.com/wp-json
+  description: Agora headless WordPress REST API (production).
+security:
+- {}
+tags:
+- name: Agora Content
+  description: Agora's own first-party agora/v1 namespace.
+paths:
+  /agora/v1/Carrers:
+    get:
+      operationId: getAgoraV1Carrers
+      summary: GET /agora/v1/Carrers
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/all_categories:
+    get:
+      operationId: getAgoraV1AllCategories
+      summary: GET /agora/v1/all_categories
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/fetch-theme-setting:
+    get:
+      operationId: getAgoraV1FetchThemeSetting
+      summary: GET /agora/v1/fetch-theme-setting
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/flexible-content:
+    get:
+      operationId: getAgoraV1FlexibleContent
+      summary: GET /agora/v1/flexible-content
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get-author-by-author-slug/{author_slug}:
+    get:
+      operationId: getAgoraV1GetAuthorByAuthorSlug
+      summary: GET /agora/v1/get-author-by-author-slug/{author_slug}
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: author_slug
+        in: path
+        required: true
+        description: Path segment author_slug.
+        schema:
+          type: string
+      security:
+      - {}
+  /agora/v1/get-author-detail-by-author-id/{author_id}:
+    get:
+      operationId: getAgoraV1GetAuthorDetailByAuthorId
+      summary: GET /agora/v1/get-author-detail-by-author-id/{author_id}
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: author_id
+        in: path
+        required: true
+        description: Path segment author_id.
+        schema:
+          type: string
+      security:
+      - {}
+  /agora/v1/get-case-study-by-post-slug/{post_slug}:
+    get:
+      operationId: getAgoraV1GetCaseStudyByPostSlug
+      summary: GET /agora/v1/get-case-study-by-post-slug/{post_slug}
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: post_slug
+        in: path
+        required: true
+        description: Path segment post_slug.
+        schema:
+          type: string
+      security:
+      - {}
+  /agora/v1/get-categories:
+    get:
+      operationId: getAgoraV1GetCategories
+      summary: GET /agora/v1/get-categories
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get-cookie-policy:
+    get:
+      operationId: getAgoraV1GetCookiePolicy
+      summary: GET /agora/v1/get-cookie-policy
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get-more-articles-by-blog-slug/{blog_slug}:
+    get:
+      operationId: getAgoraV1GetMoreArticlesByBlogSlug
+      summary: GET /agora/v1/get-more-articles-by-blog-slug/{blog_slug}
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: blog_slug
+        in: path
+        required: true
+        description: Path segment blog_slug.
+        schema:
+          type: string
+      security:
+      - {}
+  /agora/v1/get-posts-by-post-slug/{post_slug}:
+    get:
+      operationId: getAgoraV1GetPostsByPostSlug
+      summary: GET /agora/v1/get-posts-by-post-slug/{post_slug}
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      parameters:
+      - name: post_slug
+        in: path
+        required: true
+        description: Path segment post_slug.
+        schema:
+          type: string
+      security:
+      - {}
+  /agora/v1/get-privacy-policy:
+    get:
+      operationId: getAgoraV1GetPrivacyPolicy
+      summary: GET /agora/v1/get-privacy-policy
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_ai_new_releases_filters:
+    get:
+      operationId: getAgoraV1GetAiNewReleasesFilters
+      summary: GET /agora/v1/get_ai_new_releases_filters
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_ai_new_releases_posts:
+    get:
+      operationId: getAgoraV1GetAiNewReleasesPosts
+      summary: GET /agora/v1/get_ai_new_releases_posts
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_all_authors:
+    get:
+      operationId: getAgoraV1GetAllAuthors
+      summary: GET /agora/v1/get_all_authors
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_authors_batch:
+    get:
+      operationId: getAgoraV1GetAuthorsBatch
+      summary: GET /agora/v1/get_authors_batch
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_casestudy_batch:
+    get:
+      operationId: getAgoraV1GetCasestudyBatch
+      summary: GET /agora/v1/get_casestudy_batch
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/get_category_batch_posts:
+    get:
+      operationId: getAgoraV1GetCategoryBatchPosts
+      summary: GET /agora/v1/get_category_batch_posts
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/positiondelete:
+    delete:
+      operationId: deleteAgoraV1Positiondelete
+      summary: DELETE /agora/v1/positiondelete
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here. Write route — requires an authenticated WordPress session; not exercised by this profile.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - cookieNonce: []
+      - basicAuth: []
+  /agora/v1/positionpost:
+    post:
+      operationId: postAgoraV1Positionpost
+      summary: POST /agora/v1/positionpost
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here. Write route — requires an authenticated WordPress session; not exercised by this profile.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - cookieNonce: []
+      - basicAuth: []
+  /agora/v1/positionput:
+    put:
+      operationId: putAgoraV1Positionput
+      summary: PUT /agora/v1/positionput
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here. Write route — requires an authenticated WordPress session; not exercised by this profile.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - cookieNonce: []
+      - basicAuth: []
+  /agora/v1/posts-by-category-slug-or-id:
+    get:
+      operationId: getAgoraV1PostsByCategorySlugOrId
+      summary: GET /agora/v1/posts-by-category-slug-or-id
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/recent-post-acc-to-cat:
+    get:
+      operationId: getAgoraV1RecentPostAccToCat
+      summary: GET /agora/v1/recent-post-acc-to-cat
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/sitemap:
+    get:
+      operationId: getAgoraV1Sitemap
+      summary: GET /agora/v1/sitemap
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+  /agora/v1/yoast_redirects:
+    get:
+      operationId: getAgoraV1YoastRedirects
+      summary: GET /agora/v1/yoast_redirects
+      tags:
+      - Agora Content
+      description: Route declared by the live WordPress REST route index at https://websiteapi.agorareal.com/wp-json. Parameters are copied verbatim from the index; response schemas are not declared by the index and are therefore not asserted here.
+      responses:
+        '200':
+          description: Success. Response body shape is not declared in the route index.
+          headers:
+            X-WP-Total:
+              description: Total number of matching records (collection routes).
+              schema:
+                type: integer
+            X-WP-TotalPages:
+              description: Total number of pages available (collection routes).
+              schema:
+                type: integer
+            Link:
+              description: RFC 8288 pagination links (rel="next" / rel="prev").
+              schema:
+                type: string
+          content:
+            application/json:
+              schema: {}
+        '400':
+          description: Invalid parameter.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '401':
+          description: 'Not authenticated. Observed body: {"code":"rest_not_logged_in",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '403':
+          description: 'Authenticated but not permitted. Observed body: {"code":"rest_forbidden",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+        '404':
+          description: 'No route or record. Observed body: {"code":"rest_no_route",...} / {"code":"rest_post_invalid_id",...}.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestError'
+      security:
+      - {}
+components:
+  schemas:
+    RestError:
+      type: object
+      description: WordPress REST error envelope, observed verbatim on live anonymous calls on 2026-09-12.
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code, e.g. rest_no_route, rest_post_invalid_id, rest_forbidden, rest_not_logged_in.
+        message:
+          type: string
+          description: Human-readable message.
+        data:
+          type: object
+          properties:
+            status:
+              type: integer
+              description: HTTP status code repeated in the body.
+      required:
+      - code
+      - message
+      examples:
+      - code: rest_no_route
+        message: No route was found matching the URL and request method.
+        data:
+          status: 404
+  securitySchemes:
+    cookieNonce:
+      type: apiKey
+      in: header
+      name: X-WP-Nonce
+      description: WordPress cookie-authentication nonce. Advertised by the API in Access-Control-Allow-Headers; applies to write routes only.
+    basicAuth:
+      type: http
+      scheme: basic
+      description: WordPress application passwords sent as HTTP Basic in the Authorization header. Advertised in Access-Control-Allow-Headers; applies to write routes only.
