@@ -64,23 +64,111 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Agora (**[agorareal.com](https://agorareal.com/)**) is a real estate investment management platform
-for general partners, syndicators, owners/operators and investment firms — fundraising and investor
-onboarding, an investor portal and investor CRM, digital subscriptions, data rooms, cap table and
-transaction management, waterfall automation, capital calls, ACH and cross-border payments, K-1 and
-document management, investor reporting, and integrated fund accounting, bookkeeping and tax
-services. Pricing starts at $749/month (Essential); Pro and Enterprise are quoted.
+Agora (agorareal.com) is a real estate investment management platform for general partners, syndicators, owners/operators and investment firms, covering fundraising and investor onboarding, an investor portal and investor CRM, digital subscriptions and e-signature, data rooms, cap table and transaction management, distribution waterfall automation, capital calls, ACH and cross-border payments, K-1 and document management, investor reporting, and integrated fund accounting, bookkeeping and tax services. It is sold as a subscription starting at $749/month for the Essential tier, with Pro and Enterprise tiers quoted, and its customer-facing platform is multi-tenant — every client firm gets its own investor portal and client-platform host under agorareal.com. Agora publishes no developer portal and no public reference for that platform API: "API Access" is an Enterprise line item priced separately, and the tenant API answers nothing anonymously. What it does publish anonymously is the first-party content API behind its own website, a headless WordPress install whose route index and custom agora/v1 namespace are served in the open, plus a full OAuth 2.0 / OpenID Connect authorization server on its own domain for the new Cortex AI product. Its own release feed schedules an "API + MCP" launch for 22 September 2026.
 
-## What this profile found (2026-09-12)
+**Areas:** Real Estate · Investment Management · Private Equity · Fund Administration · Investor Relations · Capital Raising · Syndication · Fund Accounting · Investor Portal · CRM · Payments · Content Management
 
-| Surface | Status |
+## Agora Real Estate on APIs.io
+
+Everything profiled for Agora Real Estate is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/agora-real-estate/](https://apis.io/providers/agora-real-estate/)** — or go straight to one of the APIs or properties below.
+
+### APIs (3)
+
+- [Agora Client Platform API](https://apis.io/apis/agora-real-estate/agora-client-platform-api/) — The tenant-scoped HTTPS API behind Agora's client platform and investor portal. Its existence and shape are established from Agora's own production surface:…
+- [Agora Authorization Server](https://apis.io/apis/agora-real-estate/agora-authorization-server/) — Agora's OAuth 2.0 / OpenID Connect authorization server, served on its own domain at auth.agorareal.com and reached by redirect from the Cortex sign-in host…
+- [Agora Real Estate Website (WordPress REST)](https://apis.io/apis/agora-real-estate/websiteapi-agorareal-com-website-wordpress-rest/) — The public WordPress REST API (wp-json) of the Agora Real Estate website at websiteapi.agorareal.com: the route index of the site's content management…
+
+### Published properties
+
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
+
+#### Security (3)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Agora Real Estate Authentication](https://apis.io/security/agora-real-estate/agora-real-estate-authentication/)
+- [Agora Real Estate Domain Security](https://apis.io/security/agora-real-estate/agora-real-estate-domain-security/)
+- [Agora Real Estate Trust Center](https://apis.io/security/agora-real-estate/agora-real-estate-trust-center/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Agora Real Estate Scopes](https://apis.io/scopes/agora-real-estate/agora-real-estate-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Agora Real Estate Plans Pricing](https://apis.io/plans/agora-real-estate/agora-real-estate-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Agora Real Estate Rate Limits](https://apis.io/rate-limits/agora-real-estate/agora-real-estate-rate-limits/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://agorareal.com/)
+- [Pricing](https://agorareal.com/pricing/)
+- [Support](https://agorareal.com/contact-us/)
+- [Blog](https://agorareal.com/blog/)
+- [Trust centre](https://trust.agorareal.com/)
+- [Terms of service](https://agorareal.com/terms-conditions/)
+- [Privacy policy](https://agorareal.com/privacy-policy/)
+
+## API Evangelist rating
+
+**Kin Score 35.2** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
 |---|---|
-| **Agora Website Content API** — `https://websiteapi.agorareal.com/wp-json` | **Public and callable anonymously.** Headless WordPress with a first-party `agora/v1` namespace of 25 Agora-authored routes. No OpenAPI is published by Agora; the specification in `openapi/` was **derived** from the live self-describing route index (HTTP 200, 326,828 bytes). |
-| **Agora Authorization Server** — `https://auth.agorareal.com` | **Discovery documents public.** OpenID Connect discovery and RFC 8414 authorization-server metadata both served anonymously; authorization-code + PKCE S256, device code, refresh token; scopes `openid profile email offline_access`. |
-| **Agora Client Platform API** — `https://{tenant}.acp.agorareal.com/api` | **Gated.** Multi-tenant (390 client-platform hosts and 389 investor-portal hosts in certificate transparency). Every anonymous `/api/*` request returns nginx 502. "API Access" is an Enterprise line item on the pricing page marked *Priced Separately*, with no public reference. |
-| **MCP / agent surface** | **Announced, not shipped.** Agora's own release feed schedules "API + MCP" for **2026-09-22** and "Agora Connect" for 2026-10-06; Cortex is waitlist-only. No MCP endpoint answers on any host today, so no `MCPServer` pointer is claimed. |
-| **Compliance** | SOC 2 Type II, SOC 1, ISO 27001:2022 and GDPR, all *fully implemented* per Agora's own Scytale-hosted trust center at [trust.agorareal.com](https://trust.agorareal.com/). |
+| Discoverability | 64.3 |
+| Contract quality | 1.7 |
+| Contract governance | 18.2 |
+| Operational transparency | 21.1 |
+| Developer ergonomics | 30.4 |
+| Access clarity | 77.6 |
 
-Not found anywhere: a developer portal, API reference, security.txt, status page, agent card, SDK on
-any package registry, or any published rate limit. The one programmatic write path a third party can
-reach today is Agora's Zapier app.
+**Agent readiness 19.8** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | — |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | served (partial credit) |
+| Idempotency | na |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | served (partial credit) |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 31.3** — Payments
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/agora-real-estate/](https://apis.io/providers/agora-real-estate/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Agora Real Estate: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/agora-real-estate/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
